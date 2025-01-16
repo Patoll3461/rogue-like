@@ -1,24 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using JetBrains.Annotations;
 using UnityEngine;
 
 public class Move : MonoBehaviour
 {
     [SerializeField] private float speed;
-    // Start is called before the first frame update
+    [SerializeField] private float rotateSpeed;
+
     void Start()
     {
-        speed = 6;
+        speed = 6f;
+        rotateSpeed = 60f;
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
-        //transform.Translate(new Vector3(1, 1, 0));
-        transform.Translate(new Vector3(horizontalInput, verticalInput, 0) * Time.deltaTime * speed);
+        transform.Translate(Vector3.up * Time.deltaTime * speed * verticalInput);
+
+        transform.Rotate(new Vector3(0, 0, -horizontalInput * Time.deltaTime * rotateSpeed));
     }
 }
