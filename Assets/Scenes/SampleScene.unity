@@ -147,6 +147,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 674366145494059044, guid: 37c783992f1d6923abe986953a7191d2, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 944444610639864534, guid: 37c783992f1d6923abe986953a7191d2, type: 3}
       propertyPath: m_Name
       value: TestRoom1
@@ -193,7 +197,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6091423950503399250, guid: 37c783992f1d6923abe986953a7191d2, type: 3}
       propertyPath: m_Speed
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6359305552200561376, guid: 37c783992f1d6923abe986953a7191d2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -203,6 +207,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -1.78
       objectReference: {fileID: 0}
+    - target: {fileID: 6539954488057176773, guid: 37c783992f1d6923abe986953a7191d2, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 91198821}
     - target: {fileID: 6539954488057176773, guid: 37c783992f1d6923abe986953a7191d2, type: 3}
       propertyPath: hurtColor.b
       value: 0

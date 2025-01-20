@@ -12,7 +12,7 @@ public class Move : MonoBehaviour
     void Start()
     {
         speed = 6f;
-        rotateSpeed = 260f;
+        rotateSpeed = 210f;
     }
 
     void FixedUpdate()
