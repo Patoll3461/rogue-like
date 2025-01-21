@@ -6,36 +6,54 @@ using UnityEngine.AI;
 public class EnemyBehaviour : MonoBehaviour
 {
     [SerializeField] private GameObject player;
-    [SerializeField] private int health;
+    [SerializeField] private float currentHealth;
+    [SerializeField] private float maxHealth;
     [SerializeField] private Color hurtColor;
     [SerializeField] private Color normalColor;
     private float knockbackForce = 30f;
     private float knockbackDuration = 0.09f;
     private Rigidbody2D rb;
+    [SerializeField] private HealthBar healthBarInstance;
     // Start is called before the first frame update
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        health = 2;
+        maxHealth = 2f;
+        currentHealth = maxHealth;
         normalColor = GetComponent<SpriteRenderer>().color;
         var agent = GetComponent<NavMeshAgent>();
 		agent.updateRotation = false;
 		agent.updateUpAxis = false;
         agent.SetDestination(player.transform.position);
         rb = GetComponent<Rigidbody2D>();
+        healthBarInstance = HealthBarManager.Instance.CreateHealthBar(this.transform);
+        UpdateHealthBar();
     }
 
     // Update is called once per frame
     void Update()
     {
         GetComponent<NavMeshAgent>().SetDestination(player.transform.position);
+
+        Vector3 targ = player.transform.position;
+        targ.z = 0f;
+
+        Vector3 objectPos = transform.position;
+        targ.x = targ.x - objectPos.x;
+        targ.y = targ.y - objectPos.y;
+
+        float angle = Mathf.Atan2(targ.y, targ.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+
+        UpdateHealthBar();
     }
 
     void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.CompareTag("Sword")) {
             if (collision.gameObject.transform.parent.GetComponent<PlayerAttack>().isAttacking) {
-                health--;
-                if (health <= 0) {
+                currentHealth--;
+                UpdateHealthBar();
+                if (currentHealth <= 0) {
                     Destroy(GetComponent<CircleCollider2D>(), 0f);
                 }
                 StartCoroutine(KnockbackCoroutine((transform.position - collision.transform.position).normalized));
@@ -57,8 +75,14 @@ public class EnemyBehaviour : MonoBehaviour
             yield return null;
         }
         rb.velocity = Vector2.zero;
-        if (health <= 0) {
+        if (currentHealth <= 0) {
             Destroy(gameObject, 0f);
         }
+    }
+
+    private void UpdateHealthBar()
+    {
+        healthBarInstance.SetHealth(currentHealth / maxHealth);
+        Debug.Log(currentHealth/maxHealth);
     }
 }
