@@ -14,9 +14,12 @@ public class EnemyBehaviour : MonoBehaviour
     private float knockbackDuration = 0.09f;
     private Rigidbody2D rb;
     [SerializeField] private HealthBar healthBarInstance;
+    [SerializeField] private HealthBarManager healthBarManager;
+    private bool invincible;
     // Start is called before the first frame update
     void Awake()
     {
+        invincible = false;
         player = GameObject.FindGameObjectWithTag("Player");
         maxHealth = 2f;
         currentHealth = maxHealth;
@@ -26,7 +29,8 @@ public class EnemyBehaviour : MonoBehaviour
 		agent.updateUpAxis = false;
         agent.SetDestination(player.transform.position);
         rb = GetComponent<Rigidbody2D>();
-        healthBarInstance = HealthBarManager.Instance.CreateHealthBar(this.transform);
+        healthBarManager = GameObject.FindGameObjectWithTag("Health").GetComponent<HealthBarManager>();
+        healthBarInstance = healthBarManager.CreateHealthBar(transform);
         UpdateHealthBar();
     }
 
@@ -52,17 +56,19 @@ public class EnemyBehaviour : MonoBehaviour
         if (collision.gameObject.CompareTag("Sword")) {
             if (collision.gameObject.transform.parent.GetComponent<PlayerAttack>().isAttacking) {
                 currentHealth--;
+                invincible = true;
                 UpdateHealthBar();
                 if (currentHealth <= 0) {
                     Destroy(GetComponent<CircleCollider2D>(), 0f);
                 }
+                Invoke("ResetColor", 0.2f);
                 StartCoroutine(KnockbackCoroutine((transform.position - collision.transform.position).normalized));
             }
         }
     }
 
     void ResetColor() {
-        GetComponent<SpriteRenderer>().color = normalColor;
+        invincible = false;
     }
 
         private IEnumerator KnockbackCoroutine(Vector2 direction)
