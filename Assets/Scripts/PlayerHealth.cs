@@ -35,8 +35,7 @@ public class PlayerHealth : MonoBehaviour
             invincible = true;
             if (currentHealth <= 0) {
                 Destroy(healthBarInstance.gameObject);
-                GetComponent<VideoPlayer>().Play();
-                Invoke("Kill", 9f);
+                Destroy(gameObject);
             }
             Invoke("ResetColor", resistanceTime);
             StartCoroutine(KnockbackCoroutine((transform.position - collision.transform.position).normalized));
@@ -64,16 +63,12 @@ public class PlayerHealth : MonoBehaviour
         }
         rb.velocity = Vector2.zero;
         if (currentHealth <= 0) {
-            Invoke("Kill", 9f);
+            Destroy(gameObject);
         }
     }
 
     private void UpdateHealthBar()
     {
         healthBarInstance.SetHealth(currentHealth / maxHealth);
-    }
-
-    private void Kill() {
-        Destroy(gameObject);
     }
 }
