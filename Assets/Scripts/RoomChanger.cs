@@ -24,6 +24,7 @@ public class RoomChanger : MonoBehaviour
     }
 
     public void ChangeRoom() {
+        GameObject.FindGameObjectWithTag("Respawn").GetComponent<HealthCarry>().UpdateHealth(GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>().currentHealth, GameObject.FindGameObjectWithTag("Player").GetComponent<Move>().controllerMode);
         SceneManager.LoadScene(room + 1);
     }
 

@@ -6,7 +6,7 @@ using UnityEngine.Video;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] private float currentHealth;
+    public float currentHealth;
     [SerializeField] private float maxHealth;
     [SerializeField] private bool invincible;
 
@@ -17,8 +17,8 @@ public class PlayerHealth : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        maxHealth = 15f;
-        currentHealth = maxHealth;
+        maxHealth = 15;
+        currentHealth = GameObject.FindGameObjectWithTag("Respawn").GetComponent<HealthCarry>().PlayerHealth;
         invincible = false;
         rb = GetComponent<Rigidbody2D>();
     }

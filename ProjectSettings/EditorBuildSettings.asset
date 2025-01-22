@@ -10,8 +10,8 @@ EditorBuildSettings:
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/Scenes/Room2.unity
-    guid: 7082a6f2af1cb940497a83d6e0eb4189
+    guid: 4798c2233ebaeb2aaa0826ca35d931f8
   - enabled: 1
     path: Assets/Scenes/Room3.unity
-    guid: a672415c50983d35d916a7efa62ed713
+    guid: 6a586c97849e5b7cba3e5ce204778d64
   m_configObjects: {}

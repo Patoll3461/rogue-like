@@ -12,6 +12,7 @@ TagManager:
   - Spike
   - Hazard
   - Nav
+  - SpikeColl
   layers:
   - Default
   - TransparentFX

@@ -15,7 +15,7 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) {
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton3)) {
             gameObject.transform.GetChild(0).GetComponent<Animator>().SetTrigger("Attack");
             isAttacking = true;
             Invoke("ResetAttacking", 0.25f);

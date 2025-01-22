@@ -19,7 +19,7 @@ public class PlayerRoomChanging : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D collision) {
         if (collision.gameObject.CompareTag("Transition")) {
-            if (Input.GetKeyDown(KeyCode.F)) {
+            if (Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown(KeyCode.JoystickButton5)) {
                 collision.gameObject.GetComponent<RoomChanger>().ChangeRoom();
                 transform.position = Vector3.zero;
             }

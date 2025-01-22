@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class SpikeAttack : MonoBehaviour
 {
@@ -17,11 +18,12 @@ public class SpikeAttack : MonoBehaviour
         
     }
 
-    void OnCollisionStay2D(Collider2D collision) {
-        if (collision.gameObject.CompareTag("Player") && GameObject.FindGameObjectWithTag("Spike").GetComponent<TileAnimationTrigger>().extended) {
-            collision.gameObject.GetComponent<PlayerHealth>().Damage(collision, 0.8f);
+    private void OnTriggerStay2D(Collider2D collision) {
+        if (collision.gameObject.CompareTag("Hazard")) {
+            if (GameObject.FindGameObjectWithTag("Spike").GetComponent<TileAnimationTrigger>().extended) {
+                transform.parent.GetComponent<PlayerHealth>().Damage(collision, 0.8f);
+            }
         }
     }
-
 }
 
