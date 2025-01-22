@@ -8,6 +8,7 @@ TagManager:
   - Transition
   - Sword
   - Health
+  - Room
   layers:
   - Default
   - TransparentFX

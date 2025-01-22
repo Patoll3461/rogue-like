@@ -5,12 +5,14 @@ using UnityEngine;
 
 public class RoomChanger : MonoBehaviour
 {
-    [SerializeField] private int room;
+    public int room;
     [SerializeField] private GameObject[] rooms;
+    public int enemyCount;
+    [SerializeField] private GameObject door;
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -20,7 +22,14 @@ public class RoomChanger : MonoBehaviour
     }
 
     public void ChangeRoom() {
+        DestroyImmediate(GetComponent<BoxCollider2D>());
+        Destroy(GameObject.FindGameObjectWithTag("Room"), 0f);
         Instantiate(rooms[room + 1], Vector3.zero, Quaternion.identity);
-        Destroy(transform.parent.parent.gameObject, 0f);
+        Destroy(this.gameObject);
+    }
+
+    public void ShowDoor() {
+        GameObject currDoor = Instantiate(door, transform.position, Quaternion.identity);
+        currDoor.GetComponent<RoomChanger>().room = room;
     }
 }

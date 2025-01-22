@@ -5055,7 +5055,7 @@ GameObject:
   - component: {fileID: 8072944715381954624}
   m_Layer: 0
   m_Name: TestRoom1
-  m_TagString: Untagged
+  m_TagString: Room
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5090,10 +5090,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fda45f361892c8ffa59dce5b93a775f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  room: 0
+  room: 1
   rooms:
   - {fileID: 944444610639864534}
   - {fileID: 102198093476169119, guid: c6df9054c336d158897d06746cb0247b, type: 3}
+  enemyCount: 1
+  door: {fileID: 3061499918682978159, guid: 2806277caf9c422c482f31e5ac6c76a9, type: 3}
 --- !u!1 &1912065845193633483
 GameObject:
   m_ObjectHideFlags: 0
@@ -5432,6 +5434,8 @@ MonoBehaviour:
   rooms:
   - {fileID: 944444610639864534}
   - {fileID: 102198093476169119, guid: c6df9054c336d158897d06746cb0247b, type: 3}
+  enemyCount: 0
+  door: {fileID: 0}
 --- !u!1 &8639580963535634925
 GameObject:
   m_ObjectHideFlags: 0
@@ -5559,6 +5563,10 @@ PrefabInstance:
     - target: {fileID: 870380802916811010, guid: 6ecb3155bc3127424b99f42cd5312740, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3249423426624592214, guid: 6ecb3155bc3127424b99f42cd5312740, type: 3}
+      propertyPath: m_Constraints
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7356719333250229641, guid: 6ecb3155bc3127424b99f42cd5312740, type: 3}
       propertyPath: m_Name

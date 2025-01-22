@@ -21,7 +21,7 @@ public class EnemyBehaviour : MonoBehaviour
     {
         invincible = false;
         player = GameObject.FindGameObjectWithTag("Player");
-        maxHealth = 10f;
+        maxHealth = 3f;
         currentHealth = maxHealth;
         normalColor = GetComponent<SpriteRenderer>().color;
         var agent = GetComponent<NavMeshAgent>();
@@ -59,6 +59,10 @@ public class EnemyBehaviour : MonoBehaviour
                 invincible = true;
                 UpdateHealthBar();
                 if (currentHealth <= 0) {
+                    GameObject.FindGameObjectWithTag("Room").GetComponent<RoomChanger>().enemyCount--;
+                    if (GameObject.FindGameObjectWithTag("Room").GetComponent<RoomChanger>().enemyCount <= 0) {
+                        GameObject.FindGameObjectWithTag("Room").GetComponent<RoomChanger>().ShowDoor();
+                    }
                     Destroy(GetComponent<CircleCollider2D>(), 0f);
                 }
                 Invoke("ResetColor", 0.2f);
