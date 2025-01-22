@@ -28,7 +28,7 @@ public class PlayerHealth : MonoBehaviour
         UpdateHealthBar();
     }
 
-    public void Damage(Collider2D collision) {
+    public void Damage(Collider2D collision, float resistanceTime) {
         if (!invincible) {
             currentHealth--;
             invincible = true;
@@ -36,8 +36,14 @@ public class PlayerHealth : MonoBehaviour
                 Destroy(healthBarInstance.gameObject);
                 Destroy(this.gameObject);
             }
-            Invoke("ResetColor", 0.1f);
+            Invoke("ResetColor", resistanceTime);
             StartCoroutine(KnockbackCoroutine((transform.position - collision.transform.position).normalized));
+        }
+    }
+
+    void OnTriggerStay2D(Collider2D collision) {
+        if (collision.gameObject.CompareTag("Hazard") && GameObject.FindGameObjectWithTag("Spike").GetComponent<TileAnimationTrigger>().extended) {
+            Damage(collision, 0.8f);
         }
     }
 

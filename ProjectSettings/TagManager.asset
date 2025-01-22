@@ -9,6 +9,8 @@ TagManager:
   - Sword
   - Health
   - Room
+  - Spike
+  - Hazard
   layers:
   - Default
   - TransparentFX

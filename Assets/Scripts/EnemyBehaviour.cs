@@ -71,7 +71,7 @@ public class EnemyBehaviour : MonoBehaviour
         }
 
         if (collision.gameObject.CompareTag("Player")) {
-            collision.GetComponent<PlayerHealth>().Damage(GetComponent<Collider2D>());
+            collision.GetComponent<PlayerHealth>().Damage(GetComponent<Collider2D>(), 0.1f);
         }
     }
 
@@ -96,5 +96,24 @@ public class EnemyBehaviour : MonoBehaviour
     private void UpdateHealthBar()
     {
         healthBarInstance.SetHealth(currentHealth / maxHealth);
+    }
+
+    void OnTriggerStay2D(Collider2D collision) {
+        if (collision.gameObject.CompareTag("Hazard") && GameObject.FindGameObjectWithTag("Spike").GetComponent<TileAnimationTrigger>().extended) {
+            if (!invincible) {
+                currentHealth--;
+                invincible = true;
+                UpdateHealthBar();
+                if (currentHealth <= 0) {
+                    GameObject.FindGameObjectWithTag("Room").GetComponent<RoomChanger>().enemyCount--;
+                    if (GameObject.FindGameObjectWithTag("Room").GetComponent<RoomChanger>().enemyCount <= 0) {
+                        GameObject.FindGameObjectWithTag("Room").GetComponent<RoomChanger>().ShowDoor();
+                    }
+                    Destroy(GetComponent<CircleCollider2D>(), 0f);
+                }
+                Invoke("ResetColor", 0.8f);
+                StartCoroutine(KnockbackCoroutine((transform.position - collision.transform.position).normalized));
+            } 
+        }
     }
 }
