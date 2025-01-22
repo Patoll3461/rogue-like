@@ -95,7 +95,8 @@ public class EnemyBehaviour : MonoBehaviour
         if (currentHealth <= 0) {
             GetComponent<AudioSource>().Play();
             Destroy(GetComponent<SpriteRenderer>());
-            if (GameObject.FindGameObjectWithTag("Room").GetComponent<RoomChanger>().enemyCount <= 0 && GameObject.FindGameObjectWithTag("Transition") != null) {
+            Debug.Log(GameObject.FindGameObjectWithTag("Transition"));
+            if (GameObject.FindGameObjectWithTag("Room").GetComponent<RoomChanger>().enemyCount <= 0 && GameObject.FindGameObjectWithTag("Transition") == null) {
                 GameObject.FindGameObjectWithTag("Room").GetComponent<RoomChanger>().ShowDoor();
             }
             if (GetComponent<AudioSource>().isPlaying) {

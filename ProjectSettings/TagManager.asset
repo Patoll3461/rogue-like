@@ -11,6 +11,7 @@ TagManager:
   - Room
   - Spike
   - Hazard
+  - Nav
   layers:
   - Default
   - TransparentFX

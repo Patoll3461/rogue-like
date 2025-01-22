@@ -42,11 +42,6 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    void OnTriggerStay2D(Collider2D collision) {
-        if (collision.gameObject.CompareTag("Hazard") && GameObject.FindGameObjectWithTag("Spike").GetComponent<TileAnimationTrigger>().extended) {
-            Damage(collision, 0.8f);
-        }
-    }
 
     void ResetColor() {
         invincible = false;

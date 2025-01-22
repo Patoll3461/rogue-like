@@ -101,8 +101,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   room: 0
   rooms:
-  - {fileID: 2346745943306892021, guid: 0c39aa847257f6c65a512154d7adc6c0, type: 3}
-  - {fileID: 944444610639864534, guid: 37c783992f1d6923abe986953a7191d2, type: 3}
+  - {fileID: 1631615340164185213, guid: 0b7c7aa30dd36ee48b113fc31edc5e8e, type: 3}
+  - {fileID: 1631615340164185213, guid: a3a5f0226538014e6bc5e4ee2aa497e3, type: 3}
   enemyCount: 0
   door: {fileID: 0}
 --- !u!61 &6474786083228221818
