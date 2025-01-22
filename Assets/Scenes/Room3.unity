@@ -1388,7 +1388,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7761710609424287467, guid: 0b7c7aa30dd36ee48b113fc31edc5e8e, type: 3}
       propertyPath: room
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8591196719461239136, guid: 0b7c7aa30dd36ee48b113fc31edc5e8e, type: 3}
       propertyPath: m_Tiles.Array.size
@@ -4804,6 +4804,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerHealth: 15
+  ControllerMode: 0
 --- !u!1001 &1497940696
 PrefabInstance:
   m_ObjectHideFlags: 0
