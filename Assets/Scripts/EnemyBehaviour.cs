@@ -21,7 +21,7 @@ public class EnemyBehaviour : MonoBehaviour
     {
         invincible = false;
         player = GameObject.FindGameObjectWithTag("Player");
-        maxHealth = 2f;
+        maxHealth = 10f;
         currentHealth = maxHealth;
         normalColor = GetComponent<SpriteRenderer>().color;
         var agent = GetComponent<NavMeshAgent>();
@@ -53,7 +53,7 @@ public class EnemyBehaviour : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.gameObject.CompareTag("Sword")) {
+        if (collision.gameObject.CompareTag("Sword") && !invincible) {
             if (collision.gameObject.transform.parent.GetComponent<PlayerAttack>().isAttacking) {
                 currentHealth--;
                 invincible = true;
@@ -65,14 +65,17 @@ public class EnemyBehaviour : MonoBehaviour
                 StartCoroutine(KnockbackCoroutine((transform.position - collision.transform.position).normalized));
             }
         }
+
+        if (collision.gameObject.CompareTag("Player")) {
+            collision.GetComponent<PlayerHealth>().Damage(GetComponent<Collider2D>());
+        }
     }
 
     void ResetColor() {
         invincible = false;
     }
 
-        private IEnumerator KnockbackCoroutine(Vector2 direction)
-    {
+    private IEnumerator KnockbackCoroutine(Vector2 direction) {
         float timer = 0;
         while (timer < knockbackDuration)
         {
@@ -89,6 +92,5 @@ public class EnemyBehaviour : MonoBehaviour
     private void UpdateHealthBar()
     {
         healthBarInstance.SetHealth(currentHealth / maxHealth);
-        Debug.Log(currentHealth/maxHealth);
     }
 }
