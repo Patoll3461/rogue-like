@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
 
 public class EnemyBehaviour : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField] private HealthBar healthBarInstance;
     [SerializeField] private HealthBarManager healthBarManager;
     private bool invincible;
+    [SerializeField] private AudioClip death;
     // Start is called before the first frame update
     void Awake()
     {
@@ -55,15 +57,17 @@ public class EnemyBehaviour : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.CompareTag("Sword") && !invincible) {
             if (collision.gameObject.transform.parent.GetComponent<PlayerAttack>().isAttacking) {
+                if (currentHealth <= 1) {
+                    GetComponent<AudioSource>().clip = death;
+                } else {
+                    GetComponent<AudioSource>().Play();
+                }
                 currentHealth--;
                 invincible = true;
                 UpdateHealthBar();
                 if (currentHealth <= 0) {
                     GameObject.FindGameObjectWithTag("Room").GetComponent<RoomChanger>().enemyCount--;
-                    if (GameObject.FindGameObjectWithTag("Room").GetComponent<RoomChanger>().enemyCount <= 0) {
-                        GameObject.FindGameObjectWithTag("Room").GetComponent<RoomChanger>().ShowDoor();
-                    }
-                    Destroy(GetComponent<CircleCollider2D>(), 0f);
+                    Destroy(GetComponent<BoxCollider2D>(), 0f);
                 }
                 Invoke("ResetColor", 0.2f);
                 StartCoroutine(KnockbackCoroutine((transform.position - collision.transform.position).normalized));
@@ -71,7 +75,7 @@ public class EnemyBehaviour : MonoBehaviour
         }
 
         if (collision.gameObject.CompareTag("Player")) {
-            collision.GetComponent<PlayerHealth>().Damage(GetComponent<Collider2D>(), 0.1f);
+            collision.GetComponent<PlayerHealth>().Damage(GetComponent<Collider2D>(), 0.2f);
         }
     }
 
@@ -89,7 +93,16 @@ public class EnemyBehaviour : MonoBehaviour
         }
         rb.velocity = Vector2.zero;
         if (currentHealth <= 0) {
-            Destroy(gameObject, 0f);
+            GetComponent<AudioSource>().Play();
+            Destroy(GetComponent<SpriteRenderer>());
+            if (GameObject.FindGameObjectWithTag("Room").GetComponent<RoomChanger>().enemyCount <= 0 && GameObject.FindGameObjectWithTag("Transition") != null) {
+                GameObject.FindGameObjectWithTag("Room").GetComponent<RoomChanger>().ShowDoor();
+            }
+            if (GetComponent<AudioSource>().isPlaying) {
+                Invoke("Kill", 0.5f);
+            } else {
+                Destroy(gameObject);
+            }
         }
     }
 
@@ -101,19 +114,29 @@ public class EnemyBehaviour : MonoBehaviour
     void OnTriggerStay2D(Collider2D collision) {
         if (collision.gameObject.CompareTag("Hazard") && GameObject.FindGameObjectWithTag("Spike").GetComponent<TileAnimationTrigger>().extended) {
             if (!invincible) {
+                if (currentHealth <= 1) {
+                    GetComponent<AudioSource>().clip = death;
+                } else {
+                    GetComponent<AudioSource>().Play();
+                }
                 currentHealth--;
                 invincible = true;
                 UpdateHealthBar();
                 if (currentHealth <= 0) {
                     GameObject.FindGameObjectWithTag("Room").GetComponent<RoomChanger>().enemyCount--;
-                    if (GameObject.FindGameObjectWithTag("Room").GetComponent<RoomChanger>().enemyCount <= 0) {
-                        GameObject.FindGameObjectWithTag("Room").GetComponent<RoomChanger>().ShowDoor();
-                    }
                     Destroy(GetComponent<CircleCollider2D>(), 0f);
                 }
                 Invoke("ResetColor", 0.8f);
                 StartCoroutine(KnockbackCoroutine((transform.position - collision.transform.position).normalized));
             } 
+        }
+    }
+
+    private void Kill() {
+        if (GetComponent<AudioSource>().isPlaying) {
+            Invoke("Kill", 0.5f);
+        } else {
+            Destroy(gameObject);
         }
     }
 }

@@ -6,7 +6,7 @@ public class TileAnimationTrigger : MonoBehaviour
 {
     public Tilemap tilemap;           // Assign your Tilemap in the Inspector
     public Sprite[] animationFrames; // Assign the sprites for the animation
-    public float animationSpeed = 0.1f; // Time between frames
+    public float animationSpeed = 0.00001f; // Time between frames
 
     private bool isAnimating = false;
     public bool extended = false;
@@ -39,6 +39,9 @@ public class TileAnimationTrigger : MonoBehaviour
                 if (tile != null)
                 {
                     // Change the sprite of the tile
+                    if (frame == 2) {
+                        GetComponent<AudioSource>().Play();
+                    }
                     if (frame == 4) {
                         extended = true;
                     }

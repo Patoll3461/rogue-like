@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Video;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -9,8 +10,8 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float maxHealth;
     [SerializeField] private bool invincible;
 
-    private float knockbackForce = 10f;
-    private float knockbackDuration = 0.07f;
+    private float knockbackForce = 20f;
+    private float knockbackDuration = 0.08f;
     private Rigidbody2D rb;
     [SerializeField] private HealthBar healthBarInstance;
     // Start is called before the first frame update
@@ -34,7 +35,8 @@ public class PlayerHealth : MonoBehaviour
             invincible = true;
             if (currentHealth <= 0) {
                 Destroy(healthBarInstance.gameObject);
-                Destroy(this.gameObject);
+                GetComponent<VideoPlayer>().Play();
+                Invoke("Kill", 9f);
             }
             Invoke("ResetColor", resistanceTime);
             StartCoroutine(KnockbackCoroutine((transform.position - collision.transform.position).normalized));
@@ -62,12 +64,16 @@ public class PlayerHealth : MonoBehaviour
         }
         rb.velocity = Vector2.zero;
         if (currentHealth <= 0) {
-            Destroy(gameObject, 0f);
+            Invoke("Kill", 9f);
         }
     }
 
     private void UpdateHealthBar()
     {
         healthBarInstance.SetHealth(currentHealth / maxHealth);
+    }
+
+    private void Kill() {
+        Destroy(gameObject);
     }
 }

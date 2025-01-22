@@ -17,9 +17,12 @@ public class PlayerRoomChanging : MonoBehaviour
         
     }
 
-    void OnTriggerEnter2D(Collider2D collision) {
+    void OnTriggerStay2D(Collider2D collision) {
         if (collision.gameObject.CompareTag("Transition")) {
-            collision.gameObject.GetComponent<RoomChanger>().ChangeRoom();
+            if (Input.GetKeyDown(KeyCode.F)) {
+                collision.gameObject.GetComponent<RoomChanger>().ChangeRoom();
+                transform.position = Vector3.zero;
+            }
         }
     }
 }
