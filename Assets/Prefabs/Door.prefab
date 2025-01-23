@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6bbf36cc71c65d207b527dc47e79b717, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -105,6 +105,8 @@ MonoBehaviour:
   - {fileID: 1631615340164185213, guid: a3a5f0226538014e6bc5e4ee2aa497e3, type: 3}
   enemyCount: 0
   door: {fileID: 0}
+  heal: {fileID: 0}
+  ascend: {fileID: 8300000, guid: 608aad984e8e34dd5a4eb31912578c60, type: 3}
 --- !u!61 &6474786083228221818
 BoxCollider2D:
   m_ObjectHideFlags: 0

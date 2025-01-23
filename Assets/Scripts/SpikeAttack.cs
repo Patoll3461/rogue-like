@@ -24,6 +24,18 @@ public class SpikeAttack : MonoBehaviour
                 transform.parent.GetComponent<PlayerHealth>().Damage(collision, 0.8f);
             }
         }
+
+        if (collision.gameObject.CompareTag("Bullet")) {
+            Destroy(collision.GetComponent<BoxCollider2D>());
+            Destroy(collision.GetComponent<Rigidbody2D>());
+            transform.parent.GetComponent<PlayerHealth>().Damage(collision, 0.2f, true);
+            StartCoroutine(DestroyBullet(collision.gameObject));
+        }
+    }
+
+    private IEnumerator DestroyBullet(GameObject bullet) {
+        yield return new WaitForSeconds(0.1f);
+        Destroy(bullet);
     }
 }
 

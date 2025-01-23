@@ -17,6 +17,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton3)) {
             gameObject.transform.GetChild(0).GetComponent<Animator>().SetTrigger("Attack");
+            gameObject.transform.GetChild(0).GetComponent<AudioSource>().Play();
             isAttacking = true;
             Invoke("ResetAttacking", 0.25f);
         }

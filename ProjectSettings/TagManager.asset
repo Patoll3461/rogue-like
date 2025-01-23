@@ -13,6 +13,9 @@ TagManager:
   - Hazard
   - Nav
   - SpikeColl
+  - Dash
+  - Bullet
+  - Heal
   layers:
   - Default
   - TransparentFX

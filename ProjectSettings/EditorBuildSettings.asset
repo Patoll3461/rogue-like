@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: 78e67bfe0bd2bc3b6a19a983ef47f188
+  - enabled: 1
     path: Assets/Scenes/Room0.unity
     guid: 452a209064bb092b99c5fe7ead3d04e4
   - enabled: 1
@@ -23,4 +26,37 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Room5.unity
     guid: 21dfc1c337230c00cb5fe171746dc262
+  - enabled: 1
+    path: Assets/Scenes/Room6.unity
+    guid: 7ad31591e354fa0c281ced21b80448db
+  - enabled: 1
+    path: Assets/Scenes/Room7.unity
+    guid: bffd2916dd6b25376ab68334dcd006d5
+  - enabled: 1
+    path: Assets/Scenes/Room8.unity
+    guid: 28293b45d0e31886483b54b264cf1024
+  - enabled: 1
+    path: Assets/Scenes/Room9.unity
+    guid: d8874bfb70836f001bdb721e93849cc2
+  - enabled: 1
+    path: Assets/Scenes/Room10.unity
+    guid: a9ee8875d3529268da0be9c1d6d42e13
+  - enabled: 1
+    path: Assets/Scenes/Room11.unity
+    guid: 606480c2d6281a6dfac05254356615f1
+  - enabled: 1
+    path: Assets/Scenes/Room12.unity
+    guid: 2fff5c71106e5eaa1be870d7b04308be
+  - enabled: 1
+    path: Assets/Scenes/Room13.unity
+    guid: cba0ce89085f5f82f990eb6fbdb1ccd2
+  - enabled: 1
+    path: Assets/Scenes/Room14.unity
+    guid: e6f9f31db0bad7e50954264207efe9a9
+  - enabled: 1
+    path: Assets/Scenes/Room15.unity
+    guid: e0811cfdc3fbf6f1192106a3fc1cba62
+  - enabled: 1
+    path: Assets/Scenes/End.unity
+    guid: 47df296dbb2b456c2ac9ecd0684b8949
   m_configObjects: {}
